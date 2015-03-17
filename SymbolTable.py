@@ -27,18 +27,25 @@ builtin_symbols = {'SP' : 0,
 
 
 class SymbolTable:
+    """The SymbolTable keeps track of labels defined in assembler source during compilation.
+       TODO: Refactor a little bit to move away from the interface described in the NAND2Tetris documentation
+       and closer to an idiomatic design.
+    """
     def __init__(self):
         self._symbol_dict = {}
         self._symbol_dict.update(builtin_symbols)
 
     def addEntry(self, symbol, address):
+        """Add a symbol to the table with the supplied address as its value."""
         if symbol in self._symbol_dict:
             print("Attempted redefinition of symbol: {0}".format(symbol))
         else:
             self._symbol_dict[symbol] = address
 
     def contains(self, symbol):
+        """Determine existence of specified symbol in table."""
         return symbol in self._symbol_dict
 
     def GetAddress(self, symbol):
+        """Retrieve address associated with given symbol from table."""
         return self._symbol_dict[symbol]

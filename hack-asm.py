@@ -1,9 +1,7 @@
 __author__ = 'otakucode'
 # hack-asm - An assembler for the Hack architecture defined in the NAND2Tetris course.
 
-import re, sys, os
-
-symbol_pattern = r'[a-zA-Z_\.$:][\w_\.$:]+'
+import sys, os
 
 
 builtin_symbols = {'SP' : 0,
@@ -95,7 +93,6 @@ class Parser():
             self.cjump = pstring
         else:
             self.ccomp = pstring
-
 
     def commandType(self):
         return self.command

@@ -6,6 +6,13 @@ from pyparsing import Word, ZeroOrMore, OneOrMore, OnlyOnce, Literal, Optional, 
 import string
 
 class HackProgram:
+    """This class represents an ordered collection of HackAssemblyCommand objects, and provides
+       the functionality necessary to convert from assembly source code to Hack machine code.  It
+       will eventually also provide disassembler functionality.
+    """
+
+    # Static lookup tables with data defined in the NAND2Tetris course.  Provides equivalence
+    # between source strings and the machine code they translate into.
     dest_dict = {'' : '000',
                   'M=' : '001',
                   'D=' : '010',
@@ -58,6 +65,8 @@ class HackProgram:
         self.machine_code = []
 
     def ParseAssembly(self, text):
+        """Take the provided assembler code and transform it into a collection of HackAssemblyCommand objects
+           stored within this object."""
         start_symbol_char = string.ascii_letters + '_.$:'
         symbol_char = string.ascii_letters + string.digits + '_.$:'
         symbol_name = Word(start_symbol_char, symbol_char)
@@ -102,17 +111,17 @@ class HackProgram:
                 self.rom_location += 1
                 self.command_list.append(C_Command(result.DEST, result.COMP, result.JUMP))
 
-
-
     def ParseMachineCode(self, code):
+        """Accepts machine code in string form and translates it into a collection of HackAssemblyCommand objects."""
         pass
 
     def EmitAssembly(self):
+        """Translate the objects current collection of HackAssemblyCommand objects into assembler source which
+           would compile to identical machine code."""
         pass
 
-
-
     def EmitMachineCode(self):
+        """Translate the objects current collection of HackAssemblyCommand objects into Hack machine code."""
         for cmd in self.command_list:
             if cmd.command_type == HackCommandType.A_COMMAND:
                 if not cmd.address.isnumeric():

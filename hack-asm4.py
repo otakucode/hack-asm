@@ -5,6 +5,7 @@ __author__ = 'otakucode'
 from HackProgram import HackProgram
 import sys, os
 
+# TODO: Update to use argparse in order to make improvements easier.
 if len(sys.argv) != 2:
     print("Supply name of assembly source file.")
     exit()
